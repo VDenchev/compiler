@@ -1,0 +1,23 @@
+program {
+    main() -> void {
+        int[] arr = int[10];
+
+        arr[0] = 69;
+        arr[1] = 420;
+        arr[2] = 320;
+        arr[3] = 12;
+        arr[4] = 11;
+        arr[5] = 20;
+        arr[6] = 18;
+        arr[7] = 5;
+        arr[8] = 1;
+        arr[9] = 9;
+
+        int sum = 0;
+        int i = 0;
+        while(i < length(arr)) {
+            sum = sum + arr[i];
+            i = i + 1;
+        }
+    }
+}

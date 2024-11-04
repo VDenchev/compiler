@@ -1,0 +1,32 @@
+program {
+    max(int[] arr) -> int {
+        int i = 1;
+        max = arr[0];
+
+        while(i < length(arr)) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+            i = i + 1;
+        }
+        return max;
+    }
+
+    main() -> void {
+        int[] arr = int[10];
+
+        arr[0] = 69;
+        arr[1] = 420;
+        arr[2] = 320;
+        arr[3] = 12;
+        arr[4] = 11;
+        arr[5] = 20;
+        arr[6] = 18;
+        arr[7] = 5;
+        arr[8] = 1;
+        arr[9] = 9;
+
+        int max = @max(arr);
+        print(max);
+    }
+}

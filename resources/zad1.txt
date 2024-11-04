@@ -1,0 +1,13 @@
+program {
+    main() -> void {
+        int a = 1;
+        int total = 0;
+
+        while (i <=10) {
+            total = total + i;
+            i = i + 1;
+        }
+
+        print(total);
+    }
+}
