@@ -56,29 +56,29 @@ public class LexerImpl extends Lexer<TokenType> {
 
                 //2 character operators
                 case '-' : return handleTwoCharOp('>', TokenType.MINUS, TokenType.ARROW);
-                case '=' : /* ToDo handle operators '=' (BECOMES) and '==' (EQUALS) */
-                case '>' : /* ToDo handle operators '>' (GREATER) and '>=' (GREATER_EQ) */
-                case '<' : /* ToDo handle operators '<' (LESS) and '<=' (LESS_EQ) */
-                case '!' : /* ToDo handle operators '!' (NOT) and '!=' (NOTEQUALS) */
-                case '&' : /* ToDo handle operator '&&' (AND) or unknown symbol (OTHER)  */
-                case '|' : /* ToDo handle operator '|' (OR) or unknown symbol (OTHER) */
+                case '=' : return handleTwoCharOp('=', TokenType.BECOMES, TokenType.EQUALS);
+                case '>' : return handleTwoCharOp('=', TokenType.GREATER, TokenType.GREATER_EQ);
+                case '<' : return handleTwoCharOp('=', TokenType.LESS, TokenType.LESS_EQ);
+                case '!' : return handleTwoCharOp('=', TokenType.NOT, TokenType.NOTEQUALS);
+                case '&' : return handleTwoCharOp('&', TokenType.OTHER, TokenType.AND);
+                case '|' : return handleTwoCharOp('|', TokenType.OTHER, TokenType.AND);
                 case '/' : return handleSlash();
                 case '\'': return handleCharLiteral();
                 case '"' : return handleStringLiteral();
 
                 //1 character operators
                 case '+' : return retTokenAndAdvance(TokenType.PLUS);
-                case '[' : /* ToDo handle operator '[' (LSQUARE) */
-                case ']' : /* ToDo handle operator ']' (RSQUARE) */
-                case '{' : /* ToDo handle operator '{' (LBRACKET) */
-                case '}' : /* ToDo handle operator '}' (RBRACKET) */
-                case '(' : /* ToDo handle operator '(' (LPAREN) */
-                case ')' : /* ToDo handle operator ')' (RPAREN) */
-                case ';' : /* ToDo handle operator ';' (SEMICOLON) */
-                case '*' : /* ToDo handle operator '*' (MUL) */
-                case '%' : /* ToDo handle operator '%' (MOD) */
-                case ',' : /* ToDo handle operator ',' (COMMA) */
-                case '@' : /* ToDo handle operator '@' (AT) */
+                case '[' : return retTokenAndAdvance(TokenType.LSQUARE);
+                case ']' : return retTokenAndAdvance(TokenType.RSQUARE);
+                case '{' : return retTokenAndAdvance(TokenType.LBRACKET);
+                case '}' : return retTokenAndAdvance(TokenType.RBRACKET);
+                case '(' : return retTokenAndAdvance(TokenType.LPAREN);
+                case ')' : return retTokenAndAdvance(TokenType.RPAREN);
+                case ';' : return retTokenAndAdvance(TokenType.SEMICOLON);
+                case '*' : return retTokenAndAdvance(TokenType.MUL);
+                case '%' : return retTokenAndAdvance(TokenType.MOD);
+                case ',' : return retTokenAndAdvance(TokenType.COMMA);
+                case '@' : return retTokenAndAdvance(TokenType.AT);
 
                 default  :
                     if (isLetter(currentChar)) { return handleIdentifier(); }
@@ -173,12 +173,10 @@ public class LexerImpl extends Lexer<TokenType> {
 
     private Token<TokenType> handleIdentifier() {
         StringBuilder sb = new StringBuilder();
+      do {
         sb.append(currentChar);
         currentChar = source.next();
-        while(isLetter(currentChar) || isDigit(currentChar)) {
-            sb.append(currentChar);
-            currentChar = source.next();
-        }
+      } while (isLetter(currentChar) || isDigit(currentChar));
         String res = sb.toString();
         if (TokenType.isKeyword(res)) {
             //its a keyword so find it and return it
@@ -204,18 +202,15 @@ public class LexerImpl extends Lexer<TokenType> {
     }
 
     private boolean isLetter(char ch) {
-        /* The current character is written in ch */
-        /* If ch is a character between 'a' and 'z' or between 'A' and 'Z', return true */
-        return true; /* ToDo - REPLACE true */
+        return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
     }
 
     private boolean isDigit(char ch) {
-        /* If ch is a character between '0' and '9', return true */
-        return true; /* ToDo - REPLACE true */
+        return ch >= '0' && ch <= '9';
     }
 
     public static void main(String[] args) throws IOException {
-        Lexer<TokenType> lexer = new LexerImpl(new SourceImpl("resources/Fib.txt"));
+        Lexer<TokenType> lexer = new LexerImpl(new SourceImpl("resources/zad1.txt"));
         System.out.println(CompilerTestHelper.getTokensAsString(lexer));
     }
 
