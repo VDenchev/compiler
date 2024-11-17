@@ -1,13 +1,15 @@
 program {
     main() -> void {
-        int a = 1;
-        int total = 0;
+        int i = 1;
+        int end = 10;
 
-        while (i <=10) {
-            total = total + i;
+        int sum = 0;
+
+        while(i <= end) {
+            sum = sum + i;
             i = i + 1;
         }
 
-        print(total);
+        print("The sum of the numbers from %d to %d is %d", i, end, sum);
     }
 }
