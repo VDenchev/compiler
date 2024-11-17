@@ -104,7 +104,7 @@ public class ParserImpl extends Parser<TokenType, AST> {
   }
 
   void functionDefinition() {
-    Token token = currentToken;
+    Token identifierToken = currentToken;
     /* ToDo handle symbol */
     /* ToDo handle symbol */
     FormalParameterNode formalParameters = null;
@@ -125,7 +125,7 @@ public class ParserImpl extends Parser<TokenType, AST> {
     }
     /* ToDo handle symbol */
     BlockNode blockNode = (BlockNode) currentNode;
-    currentNode = new FunctionDefinitionNode(token, formalParameters, typeNode, blockNode);
+    currentNode = new FunctionDefinitionNode(identifierToken, formalParameters, typeNode, blockNode);
   }
 
   void functionCall() {
