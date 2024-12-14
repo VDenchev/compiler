@@ -181,6 +181,8 @@ public enum TokenType {
     factorTerminal.add(LPAREN);
     factorTerminal.add(AT);
     factorTerminal.add(LENGTH);
+    factorTerminal.add(TRUE);
+    factorTerminal.add(FALSE);
   }
 
   public static boolean isFactorTerminal(TokenType tokenType) {
