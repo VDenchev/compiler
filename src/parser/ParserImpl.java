@@ -366,6 +366,7 @@ public class ParserImpl extends Parser<TokenType, AST> {
         arrayLength();
         break;
       case LPAREN:
+        accept(TokenType.LPAREN);
         expression();
         accept(TokenType.RPAREN);
         break;
@@ -544,7 +545,7 @@ public class ParserImpl extends Parser<TokenType, AST> {
   }
 
   public static void main(String[] args) throws IOException {
-    Lexer<TokenType> lexer = new LexerImpl(new SourceImpl("resources/Fib.txt"));
+    Lexer<TokenType> lexer = new LexerImpl(new SourceImpl("resources/HelloWorld.txt"));
     Parser<TokenType, AST> parser = new ParserImpl(lexer);
     System.out.println(CompilerTestHelper.getASTasString(parser));
   }
